@@ -1,0 +1,16 @@
+{
+  "name": "react-basics",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This repository contains all the projects I've built in order to learn React and workspace setup.",
+  "workspaces": [
+    "projects/**"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lumusitech",
+  "license": "ISC"
+}
