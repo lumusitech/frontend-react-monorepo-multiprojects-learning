@@ -5,30 +5,38 @@ export const FollowMouse = () => {
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
+  // mouse follower
   useEffect(() => {
+    console.log('inicia el efecto')
+
     const handleMove = e => {
       const { clientX, clientY } = e
       setPosition({ x: clientX, y: clientY })
-
-      const circle = document.querySelector('main > div')
-      if (circle) {
-        circle.style.transform = `translate(${position.x}px, ${position.y}px)`
-      }
     }
 
     enabled && window.addEventListener('pointermove', handleMove)
+
     return () => {
-      console.log('Desmontando el evento -> cleanup')
+      console.log('Desmontado -> cleanup')
       window.removeEventListener('pointermove', handleMove)
     }
-  }, [enabled, position])
+  }, [enabled])
+
+  // change style of pointer
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enabled)
+
+    return () => {
+      document.body.classList.remove('no-cursor')
+    }
+  }, [enabled])
 
   return (
     <>
       <div
         style={{
           position: 'absolute',
-          backgroundColor: '#09f',
+          backgroundColor: 'rgba(218, 237, 18, 0.71)',
           borderRadius: '50%',
           opacity: 0.8,
           pointerEvents: 'none',
@@ -36,7 +44,7 @@ export const FollowMouse = () => {
           left: -20,
           width: 40,
           height: 40,
-          transform: 'translate(0px, 0px)',
+          transform: `translate(${position.x}px, ${position.y}px)`,
         }}
       />
 
