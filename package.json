@@ -12,5 +12,20 @@
   },
   "keywords": [],
   "author": "lumusitech",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "git-commit-msg-linter": "^5.0.8",
+    "standard": "^17.1.2"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lumusitech/frontend-react-monorepo-multiprojects-learning.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lumusitech/frontend-react-monorepo-multiprojects-learning/issues"
+  },
+  "homepage": "https://github.com/lumusitech/frontend-react-monorepo-multiprojects-learning#readme"
 }
