@@ -1,19 +1,22 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test'
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+const LOCALHOST_URL = 'http://localhost:5173/'
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+test('app shows random fact and image', async ({ page }) => {
+  await page.goto(LOCALHOST_URL)
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  // html --> head --> title
+  await expect(page).toHaveTitle(/Catty App/)
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  const h1 = page.getByRole('heading', { level: 1 })
+  const p = page.getByRole('paragraph')
+  const img = page.getByRole('img')
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+  const textContent = await p.textContent()
+  const imgSrc = await img.getAttribute('src')
+
+  expect(h1).toContainText('Catty App')
+  expect(textContent?.length).toBeGreaterThan(0)
+  expect(imgSrc).toBeTruthy()
+})
