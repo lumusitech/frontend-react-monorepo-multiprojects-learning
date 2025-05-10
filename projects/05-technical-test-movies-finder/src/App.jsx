@@ -63,9 +63,10 @@ function App() {
             type='text'
             placeholder='Stars Wars, Matrix, Avatar, ...'
           />
+
+          {!isFirstRender.current && error && <p style={{ color: 'red' }}>{error}</p>}
           <button type='submit'>Search</button>
         </form>
-        {!isFirstRender.current && error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
 
       <main>
