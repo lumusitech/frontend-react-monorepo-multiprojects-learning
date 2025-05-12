@@ -32,22 +32,30 @@ function useSearch() {
 }
 
 function App() {
+  const [sort, setSort] = useState(false)
   const { search, isFirstRender, error, setSearch } = useSearch()
-  const { movies } = useMovies()
+  const { movies, getMovies, error: moviesError, loading } = useMovies({ search, sort })
 
   const handleChange = e => {
     const newQuery = e.target.value
     setSearch(newQuery)
+    getMovies({ search: newQuery })
   }
 
   const handleSubmit = e => {
     e.preventDefault()
 
+    getMovies({ search })
+
     // uncontrolled form - React is not aware of the form
     // const fields = Object.fromEntries(new FormData(e.target))
     // const { query } = fields // from DOM
 
-    console.log({ search }) // from state
+    // console.log({ search }) // from state
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   return (
@@ -64,13 +72,16 @@ function App() {
             placeholder='Stars Wars, Matrix, Avatar, ...'
           />
 
+          <input type='checkbox' onChange={handleSort} checked={sort} />
+
           {!isFirstRender.current && error && <p style={{ color: 'red' }}>{error}</p>}
           <button type='submit'>Search</button>
         </form>
       </header>
 
       <main>
-        <Movies movies={movies} />
+        {moviesError && <p style={{ color: 'red' }}>{moviesError}</p>}
+        {loading ? <p>Loading...</p> : <Movies movies={movies} />}
       </main>
     </div>
   )
