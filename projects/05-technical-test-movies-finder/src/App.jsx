@@ -1,5 +1,5 @@
-import debounce from 'just-debounce-it'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import debounce from 'just-debounce-it' // Importa just-debounce-it
+import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
@@ -7,9 +7,6 @@ import { useMovies } from './hooks/useMovies'
 function useSearch() {
   const [search, setSearch] = useState('')
   const [error, setError] = useState(null)
-
-  //useRef is a hook that returns a mutable ref object that can be used to store a value between renders
-  // this values persist between renders
   const isFirstRender = useRef(true)
 
   useEffect(() => {
@@ -35,32 +32,42 @@ function useSearch() {
 function App() {
   const [sort, setSort] = useState(false)
   const { search, isFirstRender, error, setSearch } = useSearch()
-  const { movies, getMovies, error: moviesError, loading } = useMovies({ search, sort })
+  const {
+    movies,
+    getMovies,
+    error: moviesError,
+    loading,
+  } = useMovies({
+    search,
+    sort,
+  })
+  const [debouncedGetMovies, setDebouncedGetMovies] = useState(null)
 
-  const debouncedGetMovies = useCallback(
-    debounce(search => {
+  useEffect(() => {
+    // Create debounced function once only when component mounts
+    const debouncedFn = debounce(search => {
       console.log('search', search)
       getMovies({ search })
-    }, 1000),
-    [getMovies],
-  )
+    }, 500) // Usar 500ms
+
+    setDebouncedGetMovies(() => debouncedFn)
+
+    return () => {
+      debouncedFn.cancel()
+    }
+  }, [getMovies])
 
   const handleChange = e => {
     const newQuery = e.target.value
     setSearch(newQuery)
-    debouncedGetMovies(newQuery)
+    if (debouncedGetMovies) {
+      debouncedGetMovies(newQuery)
+    }
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-
     getMovies({ search })
-
-    // uncontrolled form - React is not aware of the form
-    // const fields = Object.fromEntries(new FormData(e.target))
-    // const { query } = fields // from DOM
-
-    // console.log({ search }) // from state
   }
 
   const handleSort = () => {
