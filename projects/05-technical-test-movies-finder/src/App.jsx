@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import debounce from 'just-debounce-it'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
@@ -36,10 +37,18 @@ function App() {
   const { search, isFirstRender, error, setSearch } = useSearch()
   const { movies, getMovies, error: moviesError, loading } = useMovies({ search, sort })
 
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      console.log('search', search)
+      getMovies({ search })
+    }, 1000),
+    [getMovies],
+  )
+
   const handleChange = e => {
     const newQuery = e.target.value
     setSearch(newQuery)
-    getMovies({ search: newQuery })
+    debouncedGetMovies(newQuery)
   }
 
   const handleSubmit = e => {
