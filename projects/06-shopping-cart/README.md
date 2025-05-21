@@ -1,6 +1,6 @@
 # Enunciado
 
-Ecommerce
+ECommerce
 
 - [x] Muestra una lista de productos que vienen de un JSON
 - [x] Añade un filtro por categoría
