@@ -1,11 +1,11 @@
-import './Products.css'
-import { AddToCartIcon } from './icons'
+import "./Products.css";
+import { AddToCartIcon } from "./icons";
 
 export const Products = ({ products = [] }) => {
   return (
-    <main className='products'>
+    <main className="products">
       <ul>
-        {products.slice(0, 10).map(product => (
+        {products.slice(0, 10).map((product) => (
           <li key={product.id}>
             <img src={product.thumbnail} alt={product.title} />
 
@@ -22,5 +22,5 @@ export const Products = ({ products = [] }) => {
         ))}
       </ul>
     </main>
-  )
-}
+  );
+};
