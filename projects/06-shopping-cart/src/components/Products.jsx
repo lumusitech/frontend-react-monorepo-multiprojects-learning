@@ -1,5 +1,5 @@
 import "./Products.css";
-import { AddToCartIcon } from "./icons";
+import { AddToCartIcon } from "./Icons";
 
 export const Products = ({ products = [] }) => {
   return (

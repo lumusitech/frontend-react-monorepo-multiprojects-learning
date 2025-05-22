@@ -1,12 +1,16 @@
 .filters {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 700;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  width: 90%;
+  margin: 0 auto;
+  gap: 1rem;
 }
 
-.filters>div {
-    display: flex;
-    gap: 1rem;
+.filters > div {
+  display: flex;
+  gap: 1rem;
 }
