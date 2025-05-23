@@ -1,51 +1,56 @@
-import { useState } from "react";
+import { useReducer, useCallback } from "react";
+import { cartReducer } from "../reducers/cartReducer"; // Tu reducer
+import {
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+} from "../actions/cartActionTypes";
 import { CartContext } from "./CartContext";
 
+const initialState = [];
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  // My way
-  //   const addToCart = (product) => {
-  //     const productInCart = cart.find((p) => p.id === product.id);
+  const [cartState, dispatch] = useReducer(cartReducer, initialState);
 
-  //     if (!productInCart) setCart((prev) => [{ ...product, qty: 1 }, ...prev]);
-  //     else {
-  //       setCart(
-  //         cart.map((product) => {
-  //           return product.id === productInCart.id
-  //             ? { ...product, qty: product.qty + 1 }
-  //             : product;
-  //         })
-  //       );
-  //     }
-  //   };
+  const addToCart = useCallback(
+    (product) => {
+      dispatch({ type: ADD_TO_CART, payload: product });
+    },
+    [dispatch]
+  );
 
-  const addToCart = (product) => {
-    const productInCartIndex = cart.findIndex((item) => item.id === product.id);
+  const removeFromCart = useCallback(
+    (product) => {
+      dispatch({ type: REMOVE_FROM_CART, payload: product });
+    },
+    [dispatch]
+  );
 
-    if (productInCartIndex >= 0) {
-      const newCart = structuredClone(cart);
+  const clearCart = useCallback(() => {
+    dispatch({ type: CLEAR_CART });
+  }, [dispatch]);
 
-      newCart[productInCartIndex].qty += 1;
+  const getTotalItems = useCallback(() => {
+    return cartState.reduce((total, item) => total + item.qty, 0);
+  }, [cartState]);
 
-      return setCart(newCart);
-    }
+  const getTotalPrice = useCallback(() => {
+    return cartState.reduce(
+      (total, item) => total + item.qty * (item.price || 0),
+      0
+    );
+  }, [cartState]);
 
-    setCart((prev) => [...prev, { ...product, qty: 1 }]);
-  };
-
-  const removeFromCart = (product) => {
-    setCart((prev) => prev.filter((item) => item.id !== product.id));
-  };
-
-  const clearCart = () => {
-    setCart([]);
+  const contextValue = {
+    cart: cartState,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    getTotalItems,
+    getTotalPrice,
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, addToCart, clearCart, removeFromCart }}
-    >
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 };

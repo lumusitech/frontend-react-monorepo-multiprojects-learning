@@ -1,4 +1,4 @@
 export * from "./cartActionTypes";
-export * from "./handlerAddToCart";
-export * from "./handlerRemoveFromCart";
-export * from "./handlerClearCart";
+export { handleAddToCart } from "./handleAddToCart";
+export { handleRemoveFromCart } from "./handleRemoveFromCart";
+export { handleClearCart } from "./handleClearCart";

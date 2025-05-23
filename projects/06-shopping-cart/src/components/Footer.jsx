@@ -8,7 +8,7 @@ export const Footer = () => {
   const { filters } = useFilters();
   const { cart } = useCart();
 
-  const singleCart = cart.map(({ id, title, qty }) => ({
+  const singleCart = cart?.map(({ id, title, qty }) => ({
     id,
     title,
     qty,
