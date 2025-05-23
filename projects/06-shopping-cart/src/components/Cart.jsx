@@ -24,8 +24,6 @@ export const Cart = () => {
   const cartCheckboxId = useId();
   const { cart, addToCart, clearCart } = useCart();
 
-  console.log({ cart });
-
   return (
     <>
       <label className="cart-button" htmlFor={cartCheckboxId}>

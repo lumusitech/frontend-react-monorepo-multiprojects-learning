@@ -1,4 +1,5 @@
-// features/cart/actions/handleAddToCart.js
+import { saveToLocalStorage } from "../storage/localStorageManagement";
+
 export const handleAddToCart = (state, action) => {
   const product = action.payload;
 
@@ -12,8 +13,12 @@ export const handleAddToCart = (state, action) => {
       qty: newCart[productInCartIndex].qty + 1,
     };
 
+    saveToLocalStorage("cart", newCart);
+
     return newCart;
   } else {
-    return [...state, { ...product, qty: 1 }];
+    const newCart = [...state, { ...product, qty: 1 }];
+    saveToLocalStorage("cart", newCart);
+    return newCart;
   }
 };

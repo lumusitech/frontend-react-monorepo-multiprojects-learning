@@ -1,4 +1,8 @@
+import { saveToLocalStorage } from "../storage/localStorageManagement";
+
 export const handleRemoveFromCart = (state, action) => {
   const product = action.payload;
-  return state.filter((item) => item.id !== product.id);
+  const newCart = state.filter((item) => item.id !== product.id);
+  saveToLocalStorage("key", newCart);
+  return newCart;
 };
