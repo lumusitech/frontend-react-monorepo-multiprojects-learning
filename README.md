@@ -10,3 +10,4 @@ This repository contains all the projects I've built in order to learn React.
 - [Technical Test - Cats Facts](projects/04-technical-test)
 - [Technical Test - Movies finder](projects/05-technical-test-movies-finder)
 - [Technical Test - Shopping Cart](projects/06-shopping-cart)
+- [Custom Router](projects/07-custom-router)
