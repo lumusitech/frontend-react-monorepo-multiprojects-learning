@@ -9,4 +9,4 @@ This repository contains all the projects I've built in order to learn React.
 - [Mouse Follower](projects/03-mouse-follower)
 - [Technical Test - Cats Facts](projects/04-technical-test)
 - [Technical Test - Movies finder](projects/05-technical-test-movies-finder)
-- [Shopping Cart](projects/06-shopping-cart)
+- [Technical Test - Shopping Cart](projects/06-shopping-cart)
