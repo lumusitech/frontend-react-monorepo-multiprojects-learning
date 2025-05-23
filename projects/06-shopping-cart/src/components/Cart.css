@@ -29,6 +29,10 @@
   padding: 8px;
 }
 
+.cart button {
+  margin-bottom: 50px;
+}
+
 .cart-button {
   align-items: center;
   background: #09f;
@@ -38,7 +42,7 @@
   height: 32px;
   justify-content: center;
   padding: 4px;
-  position: absolute;
+  position: fixed;
   right: 8px;
   top: 8px;
   transition: all 0.3s ease;
@@ -53,4 +57,5 @@
 .cart-button ~ input:checked ~ .cart {
   height: 100%;
   display: block;
+  overflow: auto;
 }
