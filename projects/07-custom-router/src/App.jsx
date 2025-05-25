@@ -7,16 +7,10 @@ import { Page404 } from "./pages/Page404";
 import { SearchPage } from "./pages/SearchPage";
 import { TwitchPage } from "./pages/TwitchPage";
 import { Router } from "./router/Router";
+import { Route } from "./router/components/Route";
 
+// Router mode 1
 const routes = [
-  {
-    path: "/",
-    Component: HomePage,
-  },
-  {
-    path: "/about",
-    Component: AboutPage,
-  },
   {
     path: "/twitch",
     Component: TwitchPage,
@@ -32,7 +26,13 @@ function App() {
     <main>
       <h1>Custom Router</h1>
       <hr />
-      <Router routes={routes} defaultComponent={Page404} />
+
+      {/* Router mode 1 - pass routes as array to <Router />*/}
+      <Router routes={routes} defaultComponent={Page404}>
+        {/* Router mode 2 - Children <Route /> - read children props like path and Component */}
+        <Route path="/" Component={HomePage} />
+        <Route path="/about" Component={AboutPage} />
+      </Router>
     </main>
   );
 }
