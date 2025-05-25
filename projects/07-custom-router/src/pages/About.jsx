@@ -1,4 +1,4 @@
-import { Link } from "../components/Link";
+import { Link } from "../router/components/Link";
 
 export default function AboutPage() {
   return (

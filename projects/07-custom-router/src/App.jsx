@@ -2,10 +2,11 @@ import "./App.css";
 
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
-import { Router } from "./Router";
+
 import { Page404 } from "./pages/Page404";
 import { SearchPage } from "./pages/SearchPage";
 import { TwitchPage } from "./pages/TwitchPage";
+import { Router } from "./router/Router";
 
 const routes = [
   {
