@@ -3,7 +3,7 @@ import { EVENTS } from "./utils/const";
 
 import { match } from "path-to-regexp";
 
-export function Router({
+export default function Router({
   children,
   routes = [],
   defaultComponent = () => <h1>404</h1>,
@@ -35,8 +35,6 @@ export function Router({
   });
 
   const routesToUse = routes.concat(routesFromChildren).filter(Boolean);
-
-  console.log({ routesFromChildren });
 
   const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true;

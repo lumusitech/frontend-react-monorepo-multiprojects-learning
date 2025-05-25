@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "../router/components/Link";
 
-export const SearchPage = ({ routeParams }) => {
+export default function SearchPage({ routeParams }) {
   useEffect(() => {
     document.title = `search ${routeParams.query}`;
   }, [routeParams.query]);
@@ -14,4 +14,4 @@ export const SearchPage = ({ routeParams }) => {
       <Link to="/">Go back to Home</Link>
     </>
   );
-};
+}

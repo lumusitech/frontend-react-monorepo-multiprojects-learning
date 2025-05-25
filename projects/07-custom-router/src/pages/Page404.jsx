@@ -1,6 +1,6 @@
 import { Link } from "../router/components/Link";
 
-export const Page404 = () => {
+export default function Page404() {
   return (
     <>
       <h1>404 - this page was not found</h1>
@@ -12,4 +12,4 @@ export const Page404 = () => {
       <Link to="/">Go back Home</Link>
     </>
   );
-};
+}
