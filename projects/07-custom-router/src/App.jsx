@@ -3,8 +3,9 @@ import "./App.css";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import { Router } from "./Router";
-import { Link } from "./components/Link";
 import { Page404 } from "./pages/Page404";
+import { SearchPage } from "./pages/SearchPage";
+import { TwitchPage } from "./pages/TwitchPage";
 
 const routes = [
   {
@@ -17,12 +18,11 @@ const routes = [
   },
   {
     path: "/twitch",
-    Component: () => (
-      <>
-        <h1>Twitch</h1>
-        <Link to="/">Go Home</Link> | <Link to="/about">Go About</Link>
-      </>
-    ),
+    Component: TwitchPage,
+  },
+  {
+    path: "/search/:query",
+    Component: SearchPage,
   },
 ];
 
