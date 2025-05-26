@@ -33,7 +33,7 @@ function App() {
         <Router routes={routes} defaultComponent={Page404}>
           {/* Router mode 2 - Children <Route /> - read children props like path and Component */}
           <Route path="/" Component={HomePage} />
-          <Route path="/about" Component={AboutPage} />
+          <Route path="/:lang/about" Component={AboutPage} />
         </Router>
       </Suspense>
     </main>

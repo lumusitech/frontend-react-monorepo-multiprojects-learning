@@ -5,7 +5,8 @@ export default function HomePage() {
     <>
       <h1>Home Page</h1>
       <p>This is an example page for create a react router from scratch</p>
-      <Link to="/about">Go About</Link> | <Link to="/twitch">Go Twitch</Link>
+      <Link to="/:lang/about">Go About</Link> |{" "}
+      <Link to="/twitch">Go Twitch</Link>
     </>
   );
 }
